@@ -1,0 +1,20 @@
+{
+  "editor.formatOnSave": true,
+  "prettier.requireConfig": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": false
+  },
+  "workbench.preferredHighContrastLightColorTheme": "Dracula",
+  "workbench.preferredLightColorTheme": "Dracula",
+  "workbench.preferredHighContrastColorTheme": "Dracula",
+  "workbench.preferredDarkColorTheme": "Dracula",
+  "workbench.colorTheme": "Dracula",
+  "workbench.colorCustomizations": {},
+  "window.autoDetectColorScheme": true
+}
