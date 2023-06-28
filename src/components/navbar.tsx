@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -18,8 +19,10 @@ const post: links[] = [
 const Navbar = () => {
   const pathname = usePathname();
   return (
-    <div className="h-30 fixed left-0 top-0 flex w-full p-4 justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-      <div className="flex "></div>
+    <div className="h-30 fixed left-0 top-0 flex w-full p-4 justify-between items-center bg-primary-blue-2/80">
+      <div className="flex">
+        <Image src="/logo1.svg" alt="logo" width={125} height={56} />
+      </div>
       <ul className="flex gap-5">
         {post.map((item, index) => {
           const isActive = pathname.endsWith(item.path);
@@ -29,16 +32,21 @@ const Navbar = () => {
               <Link
                 rel="stylesheet"
                 href={item.path}
-                className={`p-4  ${isActive ? "bg-blue-700" : "bg-#ECF3FE"}`}
+                className={`p-4 transition ease-in-out duration-300 rounded-xl hover:brightness-110 text-primary-blue-4 h-40 ${
+                  isActive
+                    ? "bg-primary-blue-2 font-bold"
+                    : "hover:bg-primary-blue-2"
+                }`}
               >
                 {item.name}
               </Link>
             </li>
           );
         })}
-
-        <li></li>
       </ul>
+      <div className="flex">
+        <Image src="/logo1.svg" alt="logo" width={125} height={56} />
+      </div>
     </div>
   );
 };
