@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <link rel="Icon" href="/favicon.ico" sizes="any" />
       <head />
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-primary-blue-5`}>
         <Navbar />
         {children}
       </body>

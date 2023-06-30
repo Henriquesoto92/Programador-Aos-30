@@ -4,37 +4,69 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type links = {
+type IPathLinks = {
   name: string;
-  path: string;
+  href: string;
 };
 
-const post: links[] = [
-  { name: "Home", path: "/" },
-  { name: "Sobre mim", path: "sobre" },
-  { name: "Projetos", path: "projetos" },
-  { name: "Lives", path: "live" },
+interface ISocialLinks extends IPathLinks {
+  src: string;
+}
+
+const pathLinks: IPathLinks[] = [
+  { name: "Home", href: "/" },
+  { name: "Sobre mim", href: "sobre" },
+  { name: "Projetos", href: "projetos" },
+  { name: "Lives", href: "live" },
+];
+
+const socialLinks: ISocialLinks[] = [
+  {
+    name: "Github",
+    src: "/assets/icon/icon-github.svg",
+    href: "https://github.com/Henriquesoto92",
+  },
+  {
+    name: "Linkedin",
+    src: "/assets/icon/icon-linkedin.svg",
+    href: "https://www.linkedin.com/in/henriquesoto92/",
+  },
+  {
+    name: "Youtube",
+    src: "/assets/icon/icon-youtube.svg",
+    href: "https://www.youtube.com/programadoraos30",
+  },
+  {
+    name: "Twitch",
+    src: "/assets/icon/icon-twitch.svg",
+    href: "https://www.twitch.tv/programadoraos30",
+  },
 ];
 
 const Navbar = () => {
   const pathname = usePathname();
   return (
-    <div className="h-30 fixed left-0 top-0 flex w-full p-4 justify-between items-center bg-primary-blue-2/80">
-      <div className="flex">
-        <Image src="/logo1.svg" alt="logo" width={125} height={56} />
+    <div className="h-30 fixed left-0 top-0 flex w-full p-4 justify-between items-center bg-primary-light2/80">
+      <div className="flex mr-[99px]">
+        <Image
+          src="/assets/logo/logo1.svg"
+          alt="logo"
+          width={125}
+          height={56}
+        />
       </div>
       <ul className="flex gap-5">
-        {post.map((item, index) => {
-          const isActive = pathname.endsWith(item.path);
+        {pathLinks.map((item, index) => {
+          const isActive = pathname.endsWith(item.href);
 
           return (
             <li key={`${index}-${item.name}`}>
               <Link
                 rel="stylesheet"
-                href={item.path}
+                href={item.href}
                 className={`p-4 transition ease-in-out duration-300 rounded-xl hover:brightness-110 text-primary-blue-4 h-40 ${
                   isActive
-                    ? "bg-primary-blue-2 font-bold"
+                    ? "font-bold bg-primary-blue-2"
                     : "hover:bg-primary-blue-2"
                 }`}
               >
@@ -44,8 +76,16 @@ const Navbar = () => {
           );
         })}
       </ul>
-      <div className="flex">
-        <Image src="/logo1.svg" alt="logo" width={125} height={56} />
+      <div className="flex gap-8">
+        {socialLinks.map((item, index) => {
+          const isActive = pathname.endsWith(item.href);
+
+          return (
+            <a href={item.href} key={`${index}-${item.name}`}>
+              <Image src={item.src} alt="logo" width={32} height={32} />
+            </a>
+          );
+        })}
       </div>
     </div>
   );
