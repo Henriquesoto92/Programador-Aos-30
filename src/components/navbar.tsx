@@ -3,6 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
 
 type IPathLinks = {
   name: string;
@@ -47,31 +57,7 @@ const Navbar = () => {
   const pathname = usePathname();
   return (
     <nav className="h-30 fixed left-0 top-0 flex w-full p-4 justify-between items-center bg-primary-light2/80">
-      <button
-        data-collapse-toggle="navbar-default"
-        type="button"
-        className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-        aria-controls="navbar-default"
-        aria-expanded="false"
-      >
-        <span className="sr-only">Open main menu</span>
-        <svg
-          className="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 17 14"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15"
-          />
-        </svg>
-      </button>
-      <div className="flex mr-[99px]">
+      <div className="flex md:mr-[99px]">
         <Image
           src="/assets/logo/logo1.svg"
           alt="logo"
@@ -79,7 +65,6 @@ const Navbar = () => {
           height={56}
         />
       </div>
-
       <ul className="hidden md:flex gap-5">
         {pathLinks.map((item, index) => {
           const isActive = pathname.endsWith(item.href);
@@ -110,6 +95,29 @@ const Navbar = () => {
           );
         })}
       </div>
+      <Sheet>
+        <SheetTrigger asChild>
+          <button
+            className="inline-flex items-center p-0 text-3xl w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            type="button"
+            id="hamburger-button"
+          >
+            &#9776;
+          </button>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Edit profile</SheetTitle>
+            <SheetDescription>corpo</SheetDescription>
+          </SheetHeader>
+          <div className="grid gap-4 py-4">teste</div>
+          <SheetFooter>
+            <SheetClose asChild>
+              <button type="submit">feche aqui</button>
+            </SheetClose>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </nav>
   );
 };
