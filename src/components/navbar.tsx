@@ -13,45 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-
-type IPathLinks = {
-  name: string;
-  href: string;
-};
-
-interface ISocialLinks extends IPathLinks {
-  src: string;
-}
-
-const pathLinks: IPathLinks[] = [
-  { name: "Home", href: "/" },
-  { name: "Sobre mim", href: "sobre" },
-  { name: "Projetos", href: "projetos" },
-  { name: "Lives", href: "live" },
-];
-
-const socialLinks: ISocialLinks[] = [
-  {
-    name: "Github",
-    src: "/assets/icon/icon-github.svg",
-    href: "https://github.com/Henriquesoto92",
-  },
-  {
-    name: "Linkedin",
-    src: "/assets/icon/icon-linkedin.svg",
-    href: "https://www.linkedin.com/in/henriquesoto92/",
-  },
-  {
-    name: "Youtube",
-    src: "/assets/icon/icon-youtube.svg",
-    href: "https://www.youtube.com/programadoraos30",
-  },
-  {
-    name: "Twitch",
-    src: "/assets/icon/icon-twitch.svg",
-    href: "https://www.twitch.tv/programadoraos30",
-  },
-];
+import { pathLinks, socialLinks } from "@/utils/links";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -98,23 +60,45 @@ const Navbar = () => {
       <Sheet>
         <SheetTrigger asChild>
           <button
-            className="inline-flex items-center p-0 text-3xl w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-0 text-3xl w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 cursor-pointer"
             type="button"
             id="hamburger-button"
           >
             &#9776;
           </button>
         </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle>Edit profile</SheetTitle>
-            <SheetDescription>corpo</SheetDescription>
-          </SheetHeader>
-          <div className="grid gap-4 py-4">teste</div>
+        <SheetContent className="p-0 flex flex-col justify-between">
+          <ul className="flex gap-8 items-end flex-col mt-[100px] px-2">
+            {pathLinks.map((item, index) => {
+              const isActive = pathname.endsWith(item.href);
+
+              return (
+                <li key={`${index}-${item.name}`}>
+                  <Link
+                    rel="stylesheet"
+                    href={item.href}
+                    className={`p-4 transition ease-in-out duration-300 rounded-xl hover:brightness-110 text-primary-blue-4 h-40 ${
+                      isActive
+                        ? "font-bold bg-primary-blue-2"
+                        : "hover:bg-primary-blue-2"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
           <SheetFooter>
-            <SheetClose asChild>
-              <button type="submit">feche aqui</button>
-            </SheetClose>
+            <div className="gap-4 w-full flex justify-between p-6">
+              {socialLinks.map((item, index) => {
+                return (
+                  <a href={item.href} key={`${index}-${item.name}`}>
+                    <Image src={item.src} alt="logo" width={32} height={32} />
+                  </a>
+                );
+              })}
+            </div>
           </SheetFooter>
         </SheetContent>
       </Sheet>
